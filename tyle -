@@ -1,0 +1,17 @@
+[33mcommit 1158f719cc56cc1d8b971a4279db6bacf3e33e5c[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: unknown <yashagarwal918@gmail.com>
+Date:   Wed Apr 8 15:12:50 2020 +0530
+
+    created home.ejs and implemented partials
+
+[33mcommit bfa2f349bc1f4e07c64e06ccab6af6fbe13d44d7[m
+Author: unknown <yashagarwal918@gmail.com>
+Date:   Wed Apr 8 09:07:05 2020 +0530
+
+    created home controllers and users controllers
+
+[33mcommit 5b758ce5ab6635a45c9c1f68719526d52c2187ce[m
+Author: unknown <yashagarwal918@gmail.com>
+Date:   Tue Apr 7 07:37:27 2020 +0530
+
+    First commit :create the directory structure and setup express server
