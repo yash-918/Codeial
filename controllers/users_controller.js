@@ -11,12 +11,20 @@ module.exports.profile=function(req,res)
 // render the sign in page
 module.exports.signUp=function(req,res)
 {
+    if(req.isAuthenticated())
+    {
+        return res.redirect("/users/profile");
+    }
     return(res.render('user_sign_up.ejs',{title:"Codeial | Sign Up"}));
 };
 
 // render the sign up page
 module.exports.signIn=function(req,res)
 {
+    if(req.isAuthenticated())
+    {
+        return res.redirect("/users/profile");
+    }
     return(res.render('user_sign_in.ejs',{title:"Codeial | Sign In"}));
 };
 
@@ -34,7 +42,7 @@ module.exports.create=function(req,res)
             User.create(req.body,function(err,user)
             {
                 if(err){console.log("error in creating user in sign up");return;}
-                return(res.redirect("/user/sign-in"));
+                return(res.redirect("/users/sign-in"));
             });
         }
         else
@@ -46,5 +54,11 @@ module.exports.create=function(req,res)
 
 module.exports.createSession=function(req,res)
 {
-
+    return res.redirect("/");
 };
+
+module.exports.destroySession= function(req,res)
+{
+    req.logout();
+    return res.redirect("/");
+}
