@@ -64,6 +64,7 @@ passport.setAuthenticatedUser=function(req,res,next)
     {
         // req.user contains the current signed in user
         res.locals.user=req.user;
+        // console.log(req);
 
     }
     next();
