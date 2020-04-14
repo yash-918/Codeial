@@ -1,4 +1,7 @@
-const Post=require("../models/post.js")
+const Post=require("../models/post.js");
+const Users=require("../models/users.js");
+
+
 module.exports.home=function(req,res)
 {
     // console.log(req.cookies);
