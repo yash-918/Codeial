@@ -10,11 +10,35 @@
     </form>
     <%  } %>
     <div id="posts-list-container">
-        <ul>
+        <li>
         <% for(post of posts)  { %>
-        <li><%= post.content %></li>
-        <li><%= post.user.name %></li>
+        <p>
+        <ol><%= post.content %></ol>
+        <ol><%= post.user.name %></ol>
+        </p>
+        <div class="post-comments">
+        <% if (locals.user) { %>
+            <form action="/comments/create" method="POST">
+                <textarea name="content" cols="10" rows="4" placeholder="Type your comments here" required ></textarea>
+                <input type="hidden" name="post" value= "<%= post.id %>" >
+                <input type="submit" value="Add Comment">
+            </form>
         <% } %>
-        </ul>
+        </div>
+        <div class="post-comments-list">
+            <ul id="post-comments-<%= post.id %>" >
+            <% for (comment of post.comments) { %>
+                <p>
+                <%= comment.content %>
+                <br>
+                <small>
+                    <%= comment.user.name %>
+                </small>
+                </p>
+            <% } %>
+            </ul>
+        </div>
+        <% } %>
+        </li>
     </div>
 </section>
