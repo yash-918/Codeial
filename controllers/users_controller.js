@@ -2,10 +2,34 @@ const User=require("../models/users.js");
 
 module.exports.profile=function(req,res)
 {
-    return res.render('users_profile.ejs',
+    User.findById(req.params.id,function(err,user)
     {
-        title : "Codeial Profile Page"
+        return res.render('users_profile.ejs',
+        {
+            title : "Codeial Profile Page",
+            profile_user: user
+        });
     });
+}
+
+module.exports.update=function(req,res)
+{
+    if(req.user.id==req.params.id)
+    {
+        User.findByIdAndUpdate(req.params.id,{name:req.body.name,email:req.body.email},function(err,user)
+        {
+            if(err)
+            {
+                console.log("error in updating");
+                return;
+            }
+            return res.redirect("back");
+        });
+    }
+    else
+    {
+        return res.status(401).send("Unauthorised");
+    }
 }
 
 // render the sign in page
@@ -54,11 +78,13 @@ module.exports.create=function(req,res)
 
 module.exports.createSession=function(req,res)
 {
+    req.flash("success","Logged In successfully");
     return res.redirect("/");
-};
+}
 
 module.exports.destroySession= function(req,res)
 {
     req.logout();
+    req.flash("success","Logged Out successfully");
     return res.redirect("/");
 }

@@ -1,0 +1,15 @@
+        <p>
+            <ol><%= post.content %></ol>
+            <ol><%= post.user.name %></ol>
+            <% if((locals.user)  && (locals.user.id==post.user.id) ){ %>
+            <small>
+                <a href="/posts/destroy/<%= post.id %>" >
+                Delete This Post
+                </a>
+            </small>
+            <% } %>
+        </p>
+        <div class="post-comments">
+        
+        <%- include('_comment.ejs'); %>
+        </div>

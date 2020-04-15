@@ -3,6 +3,8 @@
         <title>
             <%= title %>
         </title>
+        <link rel="stylesheet"  text="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+        <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
         <link rel="stylesheet" type="text/css" href="/css/layout.css">
         <%- style %>
     </head>
@@ -11,5 +13,26 @@
         <%- body %>
         <%- include('_footer.ejs');%>
         <%- script %>
+        <!-- <h1>"Noty"</h1> -->
+        <script>
+            <% if(locals.flash.success && locals.flash.success.length>0 ){ %>
+                new Noty({
+                    theme : "relax",
+                    text : "<%= locals.flash.success %>",
+                    type : "success",
+                    layout : "topRight",
+                    timeout : 1500
+                }).show();
+            <% } %>
+            <% if(locals.flash.error && locals.flash.error.length>0 ){ %>
+                new Noty({
+                    theme : "relax",
+                    text : "<%= locals.flash.error %>",
+                    type : "error",
+                    layout : "topRight",
+                    timeout : 1500
+                }).show();
+            <% } %>
+        </script>
     </body>
 </html>
