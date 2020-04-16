@@ -1,9 +1,10 @@
-        <p>
+    <li id="post-<%= post.id %>">    
+    <p>
             <ol><%= post.content %></ol>
             <ol><%= post.user.name %></ol>
             <% if((locals.user)  && (locals.user.id==post.user.id) ){ %>
             <small>
-                <a href="/posts/destroy/<%= post.id %>" >
+                <a class="delete-post-button" href="/posts/destroy/<%= post.id %>" >
                 Delete This Post
                 </a>
             </small>
@@ -13,3 +14,4 @@
         
         <%- include('_comment.ejs'); %>
         </div>
+    </li>

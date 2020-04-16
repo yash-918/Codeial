@@ -12,11 +12,11 @@
     </form>
     <%  } %>
     <div id="posts-list-container">
-        <li>
+        <ul>
         <% for(post of posts)  { %>
         <%- include('_post.ejs'); %>
         <% } %>
-        </li>
+        </ul>
     </div>
 </section>
 <section id="user-friends">
@@ -30,3 +30,5 @@
     <% } %>
 </section>
 </div>
+<script type="text/javascript" src="/js/home_posts.js"></script>
+
