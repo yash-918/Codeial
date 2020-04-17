@@ -42,7 +42,6 @@ class PostComments{
                         type: 'success',
                         layout: 'topRight',
                         timeout: 1500
-                        
                     }).show();
 
                 }, error: function(error){

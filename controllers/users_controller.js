@@ -1,5 +1,6 @@
 const User = require('../models/user');
-
+const fs=require("fs");
+const path = require("path");
 // let's keep it same as before
 module.exports.profile = function(req, res){
     User.findById(req.params.id, function(err, user){
@@ -12,16 +13,57 @@ module.exports.profile = function(req, res){
 }
 
 
-module.exports.update = function(req, res){
+module.exports.update = async function(req, res){
+    // if(req.user.id == req.params.id){
+    //     User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+    //         req.flash('success', 'Updated!');
+    //         return res.redirect('back');
+    //     });
+    // }else{
+    //     req.flash('error', 'Unauthorized!');
+    //     return res.status(401).send('Unauthorized');
+    // }
+    // converted to async await
     if(req.user.id == req.params.id){
-        User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
-            req.flash('success', 'Updated!');
+         try {
+            let user= await User.findById(req.params.id);
+            // we won't be able to access the req.body without the uploadedAvatar function because it is multipart
+            User.uploadedAvatar(req,res,function(err)
+           
+            {
+                if(err){console.log("multer error",err);return;}
+                user.name=req.body.name;
+                user.email=req.body.email;
+                if(req.file)
+                {
+                    // checking if there is already an avatar for the user,to delete the old one
+                    if(user.avatar)
+                    {
+                        // checking the file path exists or not
+                        if(fs.existsSync(path.join(__dirname,"..",user.avatar)))
+                        {
+                            // deleting the old avatar from folder
+                            fs.unLinkSync(path.join(__dirname,"..",user.avatar));
+                        }
+                    }
+                    // this is saving the path of the uploaded file into avatar field in the user
+                    user.avatar=User.avatarPath+'/'+req.file.filename;
+                }
+                user.save();
+                return res.redirect("back");
+                
+            });
+        } catch (err) {
+             req.flash('error', err);
+        // added this to view the error on console as well
+        // console.log(err);
             return res.redirect('back');
-        });
-    }else{
-        req.flash('error', 'Unauthorized!');
-        return res.status(401).send('Unauthorized');
+         }
     }
+    else{
+    req.flash('error', 'Unauthorized!');
+    return res.status(401).send('Unauthorized');}
+
 }
 
 
