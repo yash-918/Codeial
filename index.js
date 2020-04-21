@@ -17,6 +17,13 @@ const flash = require('connect-flash');
 const customMware = require('./config/middleware');
 const multer=require("multer");
 
+// setup the chat server to be used with io
+const chatServer= require('http').Server(app);
+const chatSockets=require("./config/chat_sockets.js").chatSockets(chatServer);
+chatServer.listen(5000);
+
+
+
 app.use(sassMiddleware({
     src: './assets/scss',
     dest: './assets/css',
