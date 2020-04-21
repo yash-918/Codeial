@@ -19,11 +19,26 @@
                     <%} %>
                 </ul>
             </div>
+
         </section>
-        
-        
+        <% if(current_user){ %>
         <section id="user-friends">
             <h4>Friends</h4>
+            <% if(current_user){ %>
+                <!-- <%= current_user.name %> -->
+                <% for(u of current_user.friendships){%>
+                    <p>
+                        <a href="/users/profile/<%= u.to_user.id %>"><%= u.to_user.name %></a>
+                        <small>
+                            <a class = "friendship-create" href="/friendships/breakup/<%= u.to_user.id %>">X</a>
+                        </small>
+                    </p>
+                <% } %>
+            <% } %>
+        </section>
+        <% } %>
+        <section id="users">
+            <h4>Users</h4>
             <% for(u of all_users){%>
                 <p>
                     <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
@@ -36,3 +51,11 @@
 <script src="/js/home_post_comments.js" ></script>
 <script src="/js/home_posts.js"></script>
 
+<!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
+<script src="js/toggle_likes.js"></script>
+<script>
+    $('.toggle-like-button').each(function(){
+        let self = this;
+        let toggleLike = new ToggleLike(self);
+    });
+</script>

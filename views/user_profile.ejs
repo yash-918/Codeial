@@ -17,4 +17,10 @@
             <!-- else show only the profile info -->
             <p><%= profile_user.name %></p>
             <p><%= profile_user.email %></p>
+            <% if(friendship) {%>
+                <p>Both Of You Are Friends</p>
+                <a class = "friendship-breakup" href="/friendships/breakup/<%= profile_user._id %>">BreakUp Friendship</a>
+            <% } else {%>
+                <a class = "friendship-create" href="/friendships/create/<%= profile_user._id %>">Create Friendship</a>
+            <% } %>
         <%} %>
