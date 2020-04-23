@@ -60,7 +60,5 @@ Social Media Web Application.
 
     Execute nodemon index.js from project directory for development mode
     
-    Execute npm run prod_start from project directory for production mode
-    
     Then open localhost:8000
    
