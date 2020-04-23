@@ -32,7 +32,7 @@ module.exports.home = async function(req, res){
                     path : "to_user"
                 }
             });
-            console.log(current_user.friendships[0]._id);
+            // console.log(current_user.friendships[0]._id);
         }
         return res.render('home', {
             title: "Codeial | Home",
